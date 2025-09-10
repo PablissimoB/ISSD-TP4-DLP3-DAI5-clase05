@@ -29,9 +29,35 @@
 &nbsp;<asp:Button ID="Button2" runat="server" OnClientClick="return Confirmar();" OnClick="Button2_Click" Text="Borrar" />
 &nbsp;<br />
             <br />
+            <asp:GridView ID="GridView1" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSource5" OnRowDataBound="GridView1_RowDataBound" OnRowDeleted="GridView1_RowDeleted" OnRowUpdated="GridView1_RowUpdated">
+                <Columns>
+                    <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" ReadOnly="True" SortExpression="id" />
+                    <asp:BoundField DataField="descripcion" HeaderText="descripcion" SortExpression="descripcion" />
+                    <asp:BoundField DataField="precio" HeaderText="precio" SortExpression="precio" />
+                    <asp:BoundField DataField="idCategoria" HeaderText="idCategoria" SortExpression="idCategoria" />
+                    <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                </Columns>
+            </asp:GridView>
+            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:cadena %>" DeleteCommand="DELETE FROM [Productos] WHERE [id] = @id" InsertCommand="INSERT INTO [Productos] ([descripcion], [precio], [idCategoria]) VALUES (@descripcion, @precio, @idCategoria)" SelectCommand="SELECT * FROM [Productos]" UpdateCommand="UPDATE [Productos] SET [descripcion] = @descripcion, [precio] = @precio, [idCategoria] = @idCategoria WHERE [id] = @id">
+                <DeleteParameters>
+                    <asp:Parameter Name="id" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="descripcion" Type="String" />
+                    <asp:Parameter Name="precio" Type="Int32" />
+                    <asp:Parameter Name="idCategoria" Type="Int32" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="descripcion" Type="String" />
+                    <asp:Parameter Name="precio" Type="Int32" />
+                    <asp:Parameter Name="idCategoria" Type="Int32" />
+                    <asp:Parameter Name="id" Type="Int32" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
             <br />
             <asp:Table ID="Table1" CssClass="table" runat="server" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" GridLines="Both">
             </asp:Table>
+            <br />
             <br />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cadena %>" SelectCommand="SELECT * FROM [Categorias]"></asp:SqlDataSource>
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:cadena %>" SelectCommand="SELECT * FROM [Productos] WHERE ([id] = @id)">

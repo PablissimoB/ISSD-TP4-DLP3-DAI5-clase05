@@ -28,6 +28,7 @@ namespace Clase05
 
             tablaHtml.Append("<table border='1'>");
             tablaHtml.Append("<tr>");
+            tablaHtml.Append("<th>id</th>");
             tablaHtml.Append("<th>Categorias</th>");
             tablaHtml.Append("</tr>");
 
@@ -35,6 +36,7 @@ namespace Clase05
             {
                 DataRow row = rowView.Row;
                 tablaHtml.Append("<tr>");
+                tablaHtml.AppendFormat("<td>{0}</td>", row["idCategoria"].ToString());
                 tablaHtml.AppendFormat("<td>{0}</td>", row["nombreCategoria"].ToString());
                 tablaHtml.Append("</tr>");
             }

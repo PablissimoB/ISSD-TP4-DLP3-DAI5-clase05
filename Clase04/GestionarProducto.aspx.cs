@@ -68,6 +68,8 @@ namespace Clase05
                         Table1.Rows.Add(tableRow);
                     }
                 }
+                GridView1.DataBind();
+                DropDownList2.DataBind();
             }
             catch(Exception ex)
             {
@@ -137,6 +139,30 @@ namespace Clase05
             else
             {
                 Label2.Text = "No se actualizaron registros.";
+            }
+        }
+
+        protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        {
+            completarTabla();
+        }
+
+        protected void GridView1_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+            completarTabla();
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                foreach (Control control in e.Row.Cells[4].Controls)
+                {
+                    if (control is LinkButton bc && bc.CommandName == "Delete")
+                    {
+                            bc.OnClientClick = "return confirm('¿Estás seguro de que deseas eliminar este registro?');";
+                    }
+                }
             }
         }
     }
